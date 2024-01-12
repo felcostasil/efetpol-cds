@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style_efetpol.css">
+  <title>EfetPol CDS</title>
+</head>
+
+<script>
+  async function buscar() {
+    document.querySelector("#information").innerHTML
+    const nome = document.querySelector('#nome').value
+    const matricula = document.querySelector('#matricula').value
+
+    console.log({ nome, matricula})
+    try {
+      const retorno = await fetch(`http://pool-api.ssp.ba.intranet/rhba?${nome}`, { method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } })
+    const dados = await retorno.json()
+
+    console.log(dados)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+</script>
+
+<body>
+  <header>
+    <img src="PMBA_DMT.png" alt="pmba_dmt">
+    <h1><abbr title="Efetivo Policial">EfetPol</abbr></h1>
+    <abbr title="Coordenação de Desenvolvimento de Sistemas">by CDS</abbr>
+  </header>
+
+  <main>
+    <div>
+      <h2>Buscar Policial</h2>
+      <div>
+        <form action="efetpol.html">
+          <label for="selecionar">Pesquisar por:
+            <!-- <select name="type" id="type">
+              <option value="empty" selected disabled>Selecione</option>
+              <option id="name" value="name">Nome</option>
+              <option id="mat" value="mat">Matrícula</option>
+            </select> -->
+          </label><br>
+          <label for="nome">Nome: </label>
+          <input placeholder="Digite o nome" id="nome" type="text" ><br>
+          <label for="matricula">Matrícula:</label>
+          <input placeholder="Digite a matrícula" id="matricula" type="number"><br>
+          <button type="button" value="search" onclick="buscar()">Pesquisar</button>
+        </form>
+        <div><br>
+          <h4 id="information"></h4>
+        </div>
+      </div>14452590799&&nome
+    </div>
+  </main>
+  <br>
+
+  <footer>
+    <div>
+      <h4>Sistema de Consulta de Efetivo</h4>
+      <h4>Fonte: RHBA</h4>
+      <h4>Coordenação de Desenvolvimento de Sistemas</h4>
+    </div>
+  </footer>
+</body>
+
+</html>
