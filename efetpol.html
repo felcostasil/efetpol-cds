@@ -13,24 +13,6 @@
   <title>EfetPol CDS</title>
 </head>
 
-<script>
-  async function buscar() {
-    document.querySelector("#information").innerHTML
-    const nome = document.querySelector('#nome').value
-    const matricula = document.querySelector('#matricula').value
-
-    console.log({ nome, matricula})
-    try {
-      const retorno = await fetch(`http://pool-api.ssp.ba.intranet/rhba?${nome}`, { method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } })
-    const dados = await retorno.json()
-
-    console.log(dados)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-</script>
-
 <body>
   <header>
     <img src="PMBA_DMT.png" alt="pmba_dmt">
@@ -54,12 +36,12 @@
           <input placeholder="Digite o nome" id="nome" type="text" ><br>
           <label for="matricula">Matrícula:</label>
           <input placeholder="Digite a matrícula" id="matricula" type="number"><br>
-          <button type="button" value="search" onclick="buscar()">Pesquisar</button>
+          <button type="button" value="search" onclick="buscar()">Buscar</button>
         </form>
         <div><br>
           <h4 id="information"></h4>
         </div>
-      </div>14452590799&&nome
+      </div>
     </div>
   </main>
   <br>
@@ -74,3 +56,23 @@
 </body>
 
 </html>
+
+<script>
+  async function buscar() {
+    // document.querySelector("#information").innerHTML
+    const nome = document.querySelector('#nome').value
+    const matricula = document.querySelector('#matricula').value
+    let urln = "http://pool-api.ssp.ba.intranet/rhba?" + $nome + "/json/"
+    let urlm = "http://pool-api.ssp.ba.intranet/rhba?" + $matricula + "/json/"
+
+    console.log({ nome, matricula})
+    try {
+      const retorno = await fetch(`http://pool-api.ssp.ba.intranet/rhba?${nome}`, { method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } })
+    const dados = await retorno.json()
+
+    console.log(dados)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+</script>

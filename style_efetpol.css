@@ -4,6 +4,9 @@
       -webkit-appearance: none;
       margin: 0;
     }
+    input[type=number]{
+      -moz-appearance: textfield;
+  }
     abbr[title] {
       border-bottom: none !important;
       cursor: default !important;
