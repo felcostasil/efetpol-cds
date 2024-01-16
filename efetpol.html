@@ -13,11 +13,14 @@
   <title>EfetPol CDS</title>
 </head>
 
-<body>
-  <header>
+<body class="container">
+  <header><div id="image">
     <img src="PMBA_DMT.png" alt="pmba_dmt">
+  </div>
     <h1><abbr title="Efetivo Policial">EfetPol</abbr></h1>
+    <div id="cds">
     <abbr title="Coordenação de Desenvolvimento de Sistemas">by CDS</abbr>
+  </div>
   </header>
 
   <main>
@@ -25,19 +28,21 @@
       <h2>Buscar Policial</h2>
       <div>
         <form action="efetpol.html">
-          <label for="selecionar">Pesquisar por:
-            <select name="type" id="type">
+          <div class="form">
+          <label id="procurar" for="selecionar" class="form-control">Pesquisar por:
+            <select class="form-control" name="type" id="type" >
               <option value="empty" selected disabled>Selecione</option>
               <option id="name" value="name">Nome</option>
               <option id="mat" value="mat">Matrícula</option>
             </select>
           </label><br>
+          </div>
 
           <div id="inputs">
 
           </div>
          
-          <button type="button" value="search" onclick="search()">Buscar</button>
+          <button type="button" value="search" onclick="search()" class="btn btn-secondary">Buscar</button>
         </form>
         <div><br>
           <div id="information"></div>
@@ -54,7 +59,7 @@
       <h4>Coordenação de Desenvolvimento de Sistemas</h4>
     </div>
   </footer>
-</body>
+ </body>
 
 </html>
 
