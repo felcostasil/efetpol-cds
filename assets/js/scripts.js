@@ -14,7 +14,7 @@ select.addEventListener("input", function (event) {
   if (value == "name") {
     formHtml = `
         <label for="nome">Nome: </label>
-        <input placeholder="Digite o nome" id="nome" type="text" ><br> 
+        <input  placeholder="Digite o nome" id="nome" type="text" class="form-control" ><br> 
       `
     inputs.innerHTML = formHtml
     return
@@ -22,11 +22,29 @@ select.addEventListener("input", function (event) {
 
   formHtml = `
         <label for="matricula">Matrícula:</label>
-        <input placeholder="Digite a matrícula" id="matricula" type="number"><br>
+        <input class="form-control" placeholder="Digite a matrícula" id="matricula" type="number"><br>
     `
 
   inputs.innerHTML = formHtml
 })
+
+
+const getURI = ({key, value}) => `${baseURL}?${key}=${value}`
+const handleDisplay = {
+  nome: data => displayTableInformation(data),
+  matricula: data => displaySingleInformation(data),
+}
+
+const search = async () => {
+  const field = getInputValue()
+  if (!field) throw new Error("Anything was selected")
+  
+  const url = getURI(field)
+  const data = await getData(url)
+  console.log(url)
+
+  showData(field.key, data)
+}
 
 const getData = async (url) => {
   const response = await fetch(url)
@@ -34,56 +52,77 @@ const getData = async (url) => {
   if (response.status !== 200) {
     console.error("Something wrong happened!")
   }
-
+  
   const data = await response.json()
   console.log(data)
   return data
 }
 
-const showData = (url, data) => {
-
+const showData = (inputKey, data) => {
   const div = document.querySelector("#information")
+  const html = handleDisplay[inputKey](data)
+  div.innerHTML = html
+}
 
-  if (url.includes("nome")) {
-    console.log(data)
-    return
-  }
-
-  if (url.includes("matricula")) {
-
-  }
-
-  const html = Object.keys(data).map(key => {
+const displaySingleInformation = (data) => {
+  return Object.keys(data).map(key => {
     return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
-  })
-
-  console.log(html)
-
-  div.innerHTML = html.join("")
-
+  }).join()
 }
 
-const search = async () => {
-  const nome = document.getElementById("nome");
-  const matricula = document.getElementById("matricula");
-  let url = ""
-
-
-  if (nome) {
-    url = `${baseURL}?nome=${nome.value}`
-  }
-
-
-  if (matricula) {
-    url = `${baseURL}?matricula=${matricula.value}`
-
-  }
-
+async function clickRow(event) {
+  const matricula = event.target.closest("tr").id
+  const url = getURI({key: "matricula", value: matricula})
   const data = await getData(url)
+  showData("matricula", data)
   console.log(url)
-
-  showData(url, data)
 }
+const displayTableInformation = ({meta, data}) =>  {
+
+  const tableRows = data
+    .map(({nomeServidor, matricula, cpf, rg}) => (`
+      <tr onclick="clickRow(event)" id="${matricula}">
+        <td>${nomeServidor ? nomeServidor : "Valor não definido"}</td>
+        <td>${matricula ? matricula : "Valor não definido"}</td>
+        <td>${cpf ?  cpf : "Valor não definido"}</td>
+        <td>${rg ? rg : "Valor não definido"}</td>
+        </tr>`)
+    )
+
+    console.log(tableRows)
+
+  const tableContent = tableRows.join("")
+  return `
+      <table class="table">
+        <thead class="thead-dark">
+            <th>Nome</th>
+            <th>Matricula</th>
+            <th>CPF</th>
+            <th>RG</th>
+        </thead>
+        <tbody>
+            ${tableContent}
+        </tbody>
+      </table>
+  `
+}
+
+
+
+const getInputValue = () => {
+  const inputs = ["nome", "matricula"]
+  let field
+
+  for (input of inputs) {
+    const elem = document.querySelector(`#${input}`)
+    if (!elem) continue
+    field = {key: input , value: elem.value}
+    break;
+  }
+  return field
+}
+
+
 
 
   // fetch(url)

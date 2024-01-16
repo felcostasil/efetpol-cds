@@ -25,20 +25,22 @@
       <h2>Buscar Policial</h2>
       <div>
         <form action="efetpol.html">
-          <label for="selecionar">Pesquisar por:
-            <select name="type" id="type">
-              <option value="empty" selected disabled>Selecione</option>
-              <option id="name" value="name">Nome</option>
-              <option id="mat" value="mat">Matrícula</option>
-            </select>
-          </label><br>
-
-          <div id="inputs">
-
+          <div class="form-group row">
+            <label for="selecionar" class="">Pesquisar por:
+              <select name="type" id="type" class="form-select">
+                <option value="empty" selected disabled>Selecione</option>
+                <option id="name" value="name">Nome</option>
+                <option id="mat" value="mat">Matrícula</option>
+              </select>
+            </label><br>
           </div>
-         
-          <button type="button" value="search" onclick="search()">Buscar</button>
-        </form>
+            
+            <div id="inputs">
+              
+            </div>
+            
+            <button class="btn btn-secondary" type="button" value="search" onclick="search()">Buscar</button>
+          </form>
         <div><br>
           <div id="information"></div>
         </div>
