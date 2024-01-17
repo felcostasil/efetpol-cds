@@ -30,8 +30,29 @@ const select = document.querySelector("select")
   inputs.innerHTML = formHtml
 })
 
+<<<<<<< HEAD
+
+const getURI = ({key, value}) => `${baseURL}?${key}=${value}`
+const handleDisplay = {
+  nome: data => displayTableInformation(data),
+  matricula: data => displaySingleInformation(data),
+}
+
+const search = async () => {
+  const field = getInputValue()
+  if (!field) throw new Error("Anything was selected")
+  
+  const url = getURI(field)
+  const data = await getData(url)
+  console.log(url)
+
+  showData(field.key, data)
+}
+
+=======
 /** Functions for API Request */
 const getURI = ({key, value}) => `${baseURL}?${key}=${value}`
+>>>>>>> gitlab
 const getData = async (url) => {
   const response = await fetch(url)
 
@@ -44,6 +65,23 @@ const getData = async (url) => {
   return data
 }
 
+<<<<<<< HEAD
+const showData = (inputKey, data) => {
+  const div = document.querySelector("#information")
+  const html = handleDisplay[inputKey](data)
+  div.innerHTML = html
+}
+
+const displaySingleInformation = (data) => {
+  return Object.keys(data).map(key => {
+    return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
+  }).join()
+}
+
+async function clickRow(event) {
+  const matricula = event.target.closest("tr").id
+  const url = getURI({key: "matricula", value: matricula})
+=======
 /** Display Handling */
 const handleDisplay = {
   nome: data => displayTableInformation(data),
@@ -56,11 +94,62 @@ const search = async () => {
   if (!field) throw new Error("Nothing was selected")
   
   const url = getURI(field)
+>>>>>>> gitlab
   const data = await getData(url)
+  showData("matricula", data)
   console.log(url)
+<<<<<<< HEAD
+=======
 
   showData(field.key, data)
+>>>>>>> gitlab
 }
+const displayTableInformation = ({meta, data}) =>  {
+
+  const tableRows = data
+    .map(({nomeServidor, matricula, cpf, rg}) => (`
+      <tr onclick="clickRow(event)" id="${matricula}">
+        <td>${nomeServidor ? nomeServidor : "Valor não definido"}</td>
+        <td>${matricula ? matricula : "Valor não definido"}</td>
+        <td>${cpf ?  cpf : "Valor não definido"}</td>
+        <td>${rg ? rg : "Valor não definido"}</td>
+        </tr>`)
+    )
+
+    console.log(tableRows)
+
+  const tableContent = tableRows.join("")
+  return `
+      <table class="table">
+        <thead class="thead-dark">
+            <th>Nome</th>
+            <th>Matricula</th>
+            <th>CPF</th>
+            <th>RG</th>
+        </thead>
+        <tbody>
+            ${tableContent}
+        </tbody>
+      </table>
+  `
+}
+
+
+
+const getInputValue = () => {
+  const inputs = ["nome", "matricula"]
+  let field
+
+  for (input of inputs) {
+    const elem = document.querySelector(`#${input}`)
+    if (!elem) continue
+    field = {key: input , value: elem.value}
+    break;
+  }
+  return field
+}
+
+
 
 
 /** Display Data */
