@@ -1,6 +1,5 @@
 
-const baseURL = "http://localhost:5000/rhba"
-const select = document.querySelector("select")
+import { baseURL, select } from "./testDoc.js"
 
 /** Event Listener for <select> */
   select.addEventListener("input", function (event) {
@@ -51,7 +50,7 @@ const handleDisplay = {
 }
 
 /** Search Function */
-const search = async () => {
+window.search = async function search() {
   const field = getInputValue()
   if (!field) throw new Error("Nothing was selected")
   
@@ -70,7 +69,7 @@ const showData = (inputKey, data) => {
   div.innerHTML = html
 }
 
-/** Buildin a single Exhibition for "matricula" */
+/** Building a single Exhibition for "matricula" */
 const displaySingleInformation = (data) => {
   return Object.keys(data).map(key => {
     return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
@@ -78,7 +77,7 @@ const displaySingleInformation = (data) => {
 }
 
 /** Click Event for Table Rows */
-async function clickRow(event) {
+  window.clickRow = async function clickRow(event) {
   const matricula = event.target.closest("tr").id
   const url = getURI({key: "matricula", value: matricula})
   const data = await getData(url)
@@ -118,11 +117,11 @@ const displayTableInformation = ({meta, data}) =>  {
 }
 
 /** Getting Input Value */
-const getInputValue = () => {
+window.getInputValue = function getInputValue () {
   const inputs = ["nome", "matricula"]
   let field
 
-  for (input of inputs) {
+  for (const input of inputs) {
     const elem = document.querySelector(`#${input}`)
     if (!elem) continue
     field = {key: input , value: elem.value}
@@ -134,58 +133,58 @@ const getInputValue = () => {
 
 
 
-  // fetch(url)
-  // .then(function(response){
-  //   return response.json()
-  // }).then(function(data){
-  //   const div = document.querySelector("#information")
+//   // fetch(url)
+//   // .then(function(response){
+//   //   return response.json()
+//   // }).then(function(data){
+//   //   const div = document.querySelector("#information")
 
-  //   if (url.includes("nome")) {
-  //     console.log(data)
-  //     return
-  //   } 
+//   //   if (url.includes("nome")) {
+//   //     console.log(data)
+//   //     return
+//   //   } 
 
-  //   if (url.includes("matricula")) {
+//   //   if (url.includes("matricula")) {
 
-  //   }
+//   //   }
 
-  //   const html = Object.keys(data).map(key => {
-  //     return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
-  //   })
-  //   console.log(html)
+//   //   const html = Object.keys(data).map(key => {
+//   //     return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
+//   //   })
+//   //   console.log(html)
 
-  //   div.innerHTML = html.join("")
-  // })
-  // document.querySelector(#information).insertAdjacent("beforeend", markup)
+//   //   div.innerHTML = html.join("")
+//   // })
+//   // document.querySelector(#information).insertAdjacent("beforeend", markup)
 
 
 
-// const url = "http://pool-api.ssp.ba.intranet/rhba?cpf=" + matricula;
-    // // let request = new XMLHttpRequest();
+// // const url = "http://pool-api.ssp.ba.intranet/rhba?cpf=" + matricula;
+//     // // let request = new XMLHttpRequest();
 
-    // // request.open("GET", url);
-    // // request.onerror = function (e) {
-    // //   document.getElementById("return").innerHTML="API OFFLINE OU CEP INVALIDO"
-    // // }
-    // // request.onload = () => {
-    // //   let response = JSON.parse(request.responseText)
-    // }
+//     // // request.open("GET", url);
+//     // // request.onerror = function (e) {
+//     // //   document.getElementById("return").innerHTML="API OFFLINE OU CEP INVALIDO"
+//     // // }
+//     // // request.onload = () => {
+//     // //   let response = JSON.parse(request.responseText)
+//     // }
   
 
 
-  // async function buscar() {
-    // document.querySelector("#information").innerHTML
-    // const nome = document.querySelector('#nome').value
-    // const matricula = document.querySelector('#matricula').value
-    // let urln = "http://pool-api.ssp.ba.intranet/rhba?" + $nome + "/json/"
-    // let urlm = "http://pool-api.ssp.ba.intranet/rhba?" + $matricula + "/json/"
+//   // async function buscar() {
+//     // document.querySelector("#information").innerHTML
+//     // const nome = document.querySelector('#nome').value
+//     // const matricula = document.querySelector('#matricula').value
+//     // let urln = "http://pool-api.ssp.ba.intranet/rhba?" + $nome + "/json/"
+//     // let urlm = "http://pool-api.ssp.ba.intranet/rhba?" + $matricula + "/json/"
 
-    // console.log({ nome, matricula})
-    // try {
-    //   const retorno = await fetch(`http://pool-api.ssp.ba.intranet/rhba?${nome}`, { method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } })
-    // const dados = await retorno.json()
+//     // console.log({ nome, matricula})
+//     // try {
+//     //   const retorno = await fetch(`http://pool-api.ssp.ba.intranet/rhba?${nome}`, { method: "GET", mode: 'no-cors', headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' } })
+//     // const dados = await retorno.json()
 
-    // console.log(dados)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+//     // console.log(dados)
+//     // } catch (error) {
+//     //   console.log(error)
+//     // }
