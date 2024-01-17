@@ -1,16 +1,18 @@
-const baseURL = "http://10.91.116.38:5000/rhba"
+
+const baseURL = "http://localhost:5000/rhba"
 const select = document.querySelector("select")
 
-select.addEventListener("input", function (event) {
-  event.preventDefault()
+/** Event Listener for <select> */
+  select.addEventListener("input", function (event) {
+  //event.preventDefault()
   const { target:{value} } = event
   const inputs = document.querySelector("#inputs")
+  let formHtml = ""
 
   console.log(event)
   console.log(value)
 
-  let formHtml = ""
-
+/** Selection of Input mode */
   if (value == "name") {
     formHtml = `
         <label for="nome">Nome: </label>
@@ -28,6 +30,7 @@ select.addEventListener("input", function (event) {
   inputs.innerHTML = formHtml
 })
 
+<<<<<<< HEAD
 
 const getURI = ({key, value}) => `${baseURL}?${key}=${value}`
 const handleDisplay = {
@@ -46,6 +49,10 @@ const search = async () => {
   showData(field.key, data)
 }
 
+=======
+/** Functions for API Request */
+const getURI = ({key, value}) => `${baseURL}?${key}=${value}`
+>>>>>>> gitlab
 const getData = async (url) => {
   const response = await fetch(url)
 
@@ -58,6 +65,7 @@ const getData = async (url) => {
   return data
 }
 
+<<<<<<< HEAD
 const showData = (inputKey, data) => {
   const div = document.querySelector("#information")
   const html = handleDisplay[inputKey](data)
@@ -73,9 +81,28 @@ const displaySingleInformation = (data) => {
 async function clickRow(event) {
   const matricula = event.target.closest("tr").id
   const url = getURI({key: "matricula", value: matricula})
+=======
+/** Display Handling */
+const handleDisplay = {
+  nome: data => displayTableInformation(data),
+  matricula: data => displaySingleInformation(data),
+}
+
+/** Search Function */
+const search = async () => {
+  const field = getInputValue()
+  if (!field) throw new Error("Nothing was selected")
+  
+  const url = getURI(field)
+>>>>>>> gitlab
   const data = await getData(url)
   showData("matricula", data)
   console.log(url)
+<<<<<<< HEAD
+=======
+
+  showData(field.key, data)
+>>>>>>> gitlab
 }
 const displayTableInformation = ({meta, data}) =>  {
 
@@ -109,6 +136,77 @@ const displayTableInformation = ({meta, data}) =>  {
 
 
 
+const getInputValue = () => {
+  const inputs = ["nome", "matricula"]
+  let field
+
+  for (input of inputs) {
+    const elem = document.querySelector(`#${input}`)
+    if (!elem) continue
+    field = {key: input , value: elem.value}
+    break;
+  }
+  return field
+}
+
+
+
+
+/** Display Data */
+const showData = (inputKey, data) => {
+  const div = document.querySelector("#information")
+  const html = handleDisplay[inputKey](data)
+  div.innerHTML = html
+}
+
+/** Buildin a single Exhibition for "matricula" */
+const displaySingleInformation = (data) => {
+  return Object.keys(data).map(key => {
+    return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
+  }).join()
+}
+
+/** Click Event for Table Rows */
+async function clickRow(event) {
+  const matricula = event.target.closest("tr").id
+  const url = getURI({key: "matricula", value: matricula})
+  const data = await getData(url)
+  showData("matricula", data)
+  console.log(url)
+}
+
+/** Building Table Based on Input Name */
+const displayTableInformation = ({meta, data}) =>  {
+
+  const tableRows = data
+    .map(({nomeServidor, matricula, cpf, rg}) => (`
+      <tr onclick="clickRow(event)" id="${matricula}">
+        <td>${nomeServidor ? nomeServidor : "Valor não definido"}</td>
+        <td>${matricula ? matricula : "Valor não definido"}</td>
+        <td>${cpf ?  cpf : "Valor não definido"}</td>
+        <td>${rg ? rg : "Valor não definido"}</td>
+        </tr>`)
+    )
+
+    console.log(tableRows)
+
+  const tableContent = tableRows.join("")
+  return `
+      <table class="table">
+        <thead class="thead-dark">
+            <th>Nome</th>
+            <th>Matricula</th>
+            <th>CPF</th>
+            <th>RG</th>
+        </thead>
+        <tbody>
+            ${tableContent}
+        </tbody>
+      </table>
+  `
+}
+
+/** Getting Input Value */
 const getInputValue = () => {
   const inputs = ["nome", "matricula"]
   let field
