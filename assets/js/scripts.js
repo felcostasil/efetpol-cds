@@ -1,10 +1,10 @@
-// Constants Declaration
-const baseURL = "http://10.91.116.38:5000/rhba"
+
+const baseURL = "http://localhost:5000/rhba"
 const select = document.querySelector("select")
 
-// Event Listener for <select>
-select.addEventListener("input", function (event) {
-  // event.preventDefault()
+/** Event Listener for <select> */
+  select.addEventListener("input", function (event) {
+  //event.preventDefault()
   const { target:{value} } = event
   const inputs = document.querySelector("#inputs")
   let formHtml = ""
@@ -12,7 +12,7 @@ select.addEventListener("input", function (event) {
   console.log(event)
   console.log(value)
 
-// Selection of Input mode
+/** Selection of Input mode */
   if (value == "name") {
     formHtml = `
         <label for="nome">Nome: </label>
@@ -30,7 +30,7 @@ select.addEventListener("input", function (event) {
   inputs.innerHTML = formHtml
 })
 
-// Functions for API Request
+/** Functions for API Request */
 const getURI = ({key, value}) => `${baseURL}?${key}=${value}`
 const getData = async (url) => {
   const response = await fetch(url)
@@ -44,13 +44,13 @@ const getData = async (url) => {
   return data
 }
 
-// Display Handling
+/** Display Handling */
 const handleDisplay = {
   nome: data => displayTableInformation(data),
   matricula: data => displaySingleInformation(data),
 }
 
-// Search Function
+/** Search Function */
 const search = async () => {
   const field = getInputValue()
   if (!field) throw new Error("Nothing was selected")
@@ -63,21 +63,21 @@ const search = async () => {
 }
 
 
-// Display Data
+/** Display Data */
 const showData = (inputKey, data) => {
   const div = document.querySelector("#information")
   const html = handleDisplay[inputKey](data)
   div.innerHTML = html
 }
 
-// Buildin a single Exhibition for "matricula"
+/** Buildin a single Exhibition for "matricula" */
 const displaySingleInformation = (data) => {
   return Object.keys(data).map(key => {
     return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
   }).join()
 }
 
-// Click Event for Table Rows
+/** Click Event for Table Rows */
 async function clickRow(event) {
   const matricula = event.target.closest("tr").id
   const url = getURI({key: "matricula", value: matricula})
@@ -85,7 +85,8 @@ async function clickRow(event) {
   showData("matricula", data)
   console.log(url)
 }
-// Building Table Based on Input Name
+
+/** Building Table Based on Input Name */
 const displayTableInformation = ({meta, data}) =>  {
 
   const tableRows = data
@@ -116,7 +117,7 @@ const displayTableInformation = ({meta, data}) =>  {
   `
 }
 
-// Getting Input Value
+/** Getting Input Value */
 const getInputValue = () => {
   const inputs = ["nome", "matricula"]
   let field
