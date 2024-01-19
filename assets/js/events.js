@@ -7,14 +7,15 @@ export const search = async function search() {
   const previousUrl = getPreviousUri(field)
   const nextUrl = getNextUri(field)
   const url = getURI(field)
+
+  console.log({ previousUrl, nextUrl, url })
   
-  console.log({previousUrl, nextUrl, url})
 
-  const data = await getData(url)
+  const { data, meta } = await getData(url)
   console.log(data)
-  console.log(field)
+  console.log(field.key)
 
-  showData(field.key, data)
+  showData(field.key, data, meta)
 }
 
 export const selectChangeHandler = function (event) {
@@ -40,32 +41,30 @@ export const selectChangeHandler = function (event) {
   inputs.innerHTML = formHtml
 }
 
-const showData = (inputKey, data) => {
+const showData = (inputKey, data, meta, user) => {
   const div = document.querySelector("#information")
-  const html = handleDisplay[inputKey](data)
+  const html = handleDisplay[inputKey](data, meta)
   div.innerHTML = html
 }
 
 export const clickRow = async function (event) {
   const matricula = event.target.closest("tr").id
   const url = getURI({ key: "matricula", value: matricula })
-  const data = await getData(url)
-  showData("matricula", data)
+  const {data, meta} = await getData(url)
+  showData("matricula", data, meta)
 }
 
 export const nextPage = async function nextPage() {
 
   window.currentPage++
   if (window.currentPage > 12) {
-    window.currentPage =12
+    window.currentPage = 12
     return
   }
-  const url = getURI({key: "nome", value: window.searchName})
-  
-  const data = await getData(url)
-  console.log(data)
-  
-  showData("nome", data)
+  const url = getURI({ key: "nome", value: window.searchName })
+  const {data, meta} = await getData(url)
+  // console.log(data)
+  showData("nome", data, meta)
 }
 
 export const backPage = async function backPage() {
@@ -74,12 +73,12 @@ export const backPage = async function backPage() {
     window.currentPage = 1
     return
   }
-  const url = getURI({key: "nome", value: window.searchName})
-  
-  const data = await getData(url)
+  const url = getURI({ key: "nome", value: window.searchName })
+
+  const {data, meta} = await getData(url)
   console.log(data)
 
-  showData("nome", data)
+  showData("nome", data, meta)
 }
 
 const getInputValue = function () {

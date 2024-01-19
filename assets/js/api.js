@@ -17,10 +17,10 @@ export const getData = async (url) => {
     console.error("Something wrong happened!")
   }
   
-  const data = await response.json()
-  // console.log (data.meta.actual_page)
-  console.log(data)
-  return data
+  const {data, meta} = await response.json()
+  // console.log (meta.actual_page)
+  console.log(data, meta)
+  return {data, meta}
 }
 
 
