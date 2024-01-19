@@ -1,5 +1,7 @@
 
-import { clickRow, search, selectChangeHandler } from "./events.js"
+window.currentPage = 1
+window.nameSearch = ""
+import { clickRow, search, selectChangeHandler, nextPage, backPage } from "./events.js"
 
 const select = document.querySelector("select")
 
@@ -7,3 +9,6 @@ const select = document.querySelector("select")
 select.addEventListener("input", selectChangeHandler)
 window.search = search
 window.clickRow = clickRow
+window.nextPage = nextPage
+window.backPage = backPage
+

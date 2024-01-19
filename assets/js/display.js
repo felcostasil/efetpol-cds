@@ -39,5 +39,13 @@ const displayTableInformation = ({ meta, data }) => {
             ${tableContent}
         </tbody>
       </table>
-  `
+
+      <nav arial-label="pageNavigation">
+      <ul id="pagination">
+      <button onclick="backPage()">Back</button>
+      <li id="page">Page ${window.currentPage}</li>
+      <button onclick="nextPage()">Next</button>
+      </ul>
+      </nav>
+      `
 }
