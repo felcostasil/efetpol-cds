@@ -14,8 +14,6 @@ export const search = async function search() {
   console.log(data)
   console.log(field)
 
-
-
   showData(field.key, data)
 }
 
@@ -23,7 +21,6 @@ export const selectChangeHandler = function (event) {
   const { target: { value } } = event
   const inputs = document.querySelector("#inputs")
   let formHtml = ""
-
 
   /** Selection of Input mode */
   if (value == "name") {
