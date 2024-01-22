@@ -30,7 +30,7 @@ const displayTableInformation = (data, meta) => {
   return `
   <div>
    
-  <p> Foram encontrados ${meta?.total_results} </p>
+  <p> Foram encontrados ${window.meta.total_results} </p>
   </div>
 
       <table class="table">
@@ -40,14 +40,14 @@ const displayTableInformation = (data, meta) => {
             <th>CPF</th>
             <th>RG</th>
         </thead>
-        <tbody>
+        <tbody id="tbody" >
             ${tableContent}
         </tbody>
       </table>
 
-      <div class="justify navbar navbar-expand-lg bg-body-tertiary d-flex p-2">
+      <div class="justify navbar navbar-expand-xxl bg-body-tertiary d-flex p-2">
       <button class="btn-group btn-group-toggle btn btn-primary" type="button" onclick="backPage()">Back</button>
-      <p id="page">Página ${window.currentPage} de ${meta?.total_pages}</p>
+      <p id="page">Página ${window.currentPage} de ${window.meta.total_pages}</p>
       <button class="btn-group btn-group-toggle btn btn-primary" type="button" onclick="nextPage()">Next</button>
       </div>
       `

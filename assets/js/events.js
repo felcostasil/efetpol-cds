@@ -58,14 +58,14 @@ export const clickRow = async function (event) {
 export const nextPage = async function nextPage() {
 
   window.currentPage++
-  if (window.currentPage > 12) {
-    window.currentPage = 12
+  if (window.currentPage > window.meta.total_pages) {
+    window.currentPage = window.meta.total_pages
     return
   }
   const url = getURI({ key: "nome", value: window.searchName })
-  const { data, meta } = await getData(url)
-  // console.log(data)
-  showData("nome", data, meta)
+  const data = await getData(url)
+  console.log(data)
+  showData("nome", data)
 }
 
 export const backPage = async function backPage() {
@@ -75,11 +75,10 @@ export const backPage = async function backPage() {
     return
   }
   const url = getURI({ key: "nome", value: window.searchName })
-
-  const { data, meta } = await getData(url)
+  const data = await getData(url)
   console.log(data)
 
-  showData("nome", data, meta)
+  showData("nome", data)
 }
 
 const getInputValue = function () {
