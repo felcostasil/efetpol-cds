@@ -9,13 +9,12 @@ export const search = async function search() {
   const url = getURI(field)
 
   console.log({ previousUrl, nextUrl, url })
-  
 
-  const { data, meta } = await getData(url)
-  console.log(data)
+
+  const data = await getData(url)
   console.log(field.key)
 
-  showData(field.key, data, meta)
+  showData(field.key, data)
 }
 
 export const selectChangeHandler = function (event) {
@@ -41,17 +40,19 @@ export const selectChangeHandler = function (event) {
   inputs.innerHTML = formHtml
 }
 
-const showData = (inputKey, data, meta, user) => {
+const showData = (inputKey, data) => {
   const div = document.querySelector("#information")
-  const html = handleDisplay[inputKey](data, meta)
+  const html = handleDisplay[inputKey](data)
   div.innerHTML = html
 }
 
 export const clickRow = async function (event) {
+  console.log(event.target.closest("tr"))
   const matricula = event.target.closest("tr").id
   const url = getURI({ key: "matricula", value: matricula })
-  const {data, meta} = await getData(url)
-  showData("matricula", data, meta)
+  const data = await getData(url)
+  showData("matricula", data)
+  console.log(matricula)
 }
 
 export const nextPage = async function nextPage() {
@@ -62,7 +63,7 @@ export const nextPage = async function nextPage() {
     return
   }
   const url = getURI({ key: "nome", value: window.searchName })
-  const {data, meta} = await getData(url)
+  const { data, meta } = await getData(url)
   // console.log(data)
   showData("nome", data, meta)
 }
@@ -75,7 +76,7 @@ export const backPage = async function backPage() {
   }
   const url = getURI({ key: "nome", value: window.searchName })
 
-  const {data, meta} = await getData(url)
+  const { data, meta } = await getData(url)
   console.log(data)
 
   showData("nome", data, meta)
@@ -88,10 +89,12 @@ const getInputValue = function () {
   for (const input of inputs) {
     const elem = document.querySelector(`#${input}`)
     if (!elem) continue
+
     window.searchName = elem.value
     field = { key: input, value: elem.value }
     console.log(field)
     break;
   }
+  console.log(field)
   return field
 }

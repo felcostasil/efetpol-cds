@@ -1,19 +1,19 @@
 
 export const handleDisplay = {
-  nome: (data, meta) => displayTableInformation(data, meta),
-  matricula: (data, meta) => displaySingleInformation(data, meta),
+  nome: ({ data, meta }) => displayTableInformation(data, meta),
+  matricula: (data) => displaySingleInformation(data),
 }
 
 /** Building a single Exhibition for "matricula" */
-const displaySingleInformation = (data, meta) => {
+const displaySingleInformation = (data) => {
   return Object.keys(data).map(key => {
     return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
-  }).join()
+  }).join("")
 }
 
 /** Building Table Based on Input Name */
 const displayTableInformation = (data, meta) => {
-console.log (data, meta)
+  console.log(data, meta)
   const tableRows = data
     .map(({ nomeServidor, matricula, cpf, rg }) => (`
       <tr onclick="clickRow(event)" id="${matricula}">
