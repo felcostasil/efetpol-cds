@@ -15,6 +15,7 @@ export const search = async function search() {
   console.log(field.key)
 
   showData(field.key, data)
+  // showModal(field.key, data)
 }
 
 export const selectChangeHandler = function (event) {
@@ -46,12 +47,19 @@ const showData = (inputKey, data) => {
   div.innerHTML = html
 }
 
+const showModal = (inputKey, data) => {
+  const modal = document.querySelector('#modalSingleInformation')
+  const exhibModal = handleDisplay[inputKey](data)
+  modal.innerHTML = exhibModal
+}
+
 export const clickRow = async function (event) {
   console.log(event.target.closest("tr"))
   const matricula = event.target.closest("tr").id
   const url = getURI({ key: "matricula", value: matricula })
   const data = await getData(url)
-  showData("matricula", data)
+  // showData("matricula", data)
+  showModal('matricula', data)
   console.log(matricula)
 }
 

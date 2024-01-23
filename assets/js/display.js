@@ -27,6 +27,7 @@ const displayTableInformation = (data, meta) => {
   console.log(tableRows)
 
   const tableContent = tableRows.join("")
+  // console.log(tableContent)
   return `
   <div>
    
