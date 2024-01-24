@@ -7,7 +7,25 @@ export const handleDisplay = {
 /** Building a single Exhibition for "matricula" */
 const displaySingleInformation = (data) => {
   return Object.keys(data).map(key => {
-    return `<p><strong>${key.toUpperCase()}</strong>: <span>${data[key]}</span></p>`
+    const mapping = {
+      "cpf": "CPF",
+      "matricula": "Matrícula",
+      "rg": "RG",
+      "nomeServidor": "Nome Servidor",
+      "dataNascimento": "Data de Nascimento",
+      "dataAdmissao": "Data Admissão",
+      "endereco_cidade": "Município",
+      "endereco_bairro": "Bairro",
+      "endereco_logradouro": "Logradouro",
+      "celular": "Celular",
+      "email": "Email",
+      "sexo": "Sexo",
+      "cargo": "Cargo",
+      "unidade": "Unidade",
+      "patente": "Patente"
+    }
+
+    return `<p><strong>${mapping[key].toUpperCase()}</strong>: <span>${data[key] ?? "NÃO INFORMADO"}</span></p>`
   }).join("")
 }
 
@@ -16,10 +34,10 @@ const displayTableInformation = (data, meta) => {
   console.log(data, meta)
   const tableRows = data
     .map(({ nomeServidor, matricula, cpf, rg }) => (`
-      <tr onclick="clickRow(event)" id="${matricula}">
-        <td>${nomeServidor ? nomeServidor : "Valor não definido"}</td>
+      <tr onclick="clickRow(event)" id="${matricula}" data-bs-toggle="modal" data-bs-target="#custom-modal">
+      <td>${nomeServidor ? nomeServidor : "Valor não definido"}</td>
         <td>${matricula ? matricula : "Valor não definido"}</td>
-        <td>${cpf ? cpf : "Valor não definido"}</td>
+        <td >${cpf ? cpf : "Valor não definido"}</td>
         <td>${rg ? rg : "Valor não definido"}</td>
         </tr>`)
     )
@@ -41,7 +59,7 @@ const displayTableInformation = (data, meta) => {
             <th>CPF</th>
             <th>RG</th>
         </thead>
-        <tbody id="tbody" >
+        <tbody id="tbody">
             ${tableContent}
         </tbody>
       </table>
