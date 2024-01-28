@@ -3,7 +3,10 @@ import { handleDisplay } from "./display.js"
 
 export const search = async function search() {
   const field = getInputValue()
-  if (!field) throw new Error("Nothing was selected")
+  if (!field) {
+    document.querySelector('.selectOption').textContent = alert('Selecione o tipo de busca.')
+  }
+  // throw new Error("Nothing was selected")
   const previousUrl = getPreviousUri(field)
   const nextUrl = getNextUri(field)
   const url = getURI(field)
