@@ -39,6 +39,8 @@
 
     .navbar {
       align-items: center;
+      position: relative;
+      justify-content: space-between;
     }
 
     .card {
@@ -48,7 +50,7 @@
     }
 
     footer {
-      position: fixed;
+      position: relative;
       bottom: 10px;
       width: 100%;
     }
