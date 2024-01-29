@@ -1,6 +1,7 @@
 import { getURI, getData, getNextUri, getPreviousUri } from "./api.js"
 import { handleDisplay } from "./display.js"
 
+/* Identify key in selection */
 export const search = async function search() {
   const field = getInputValue()
   if (!field) {
@@ -44,6 +45,7 @@ export const selectChangeHandler = function (event) {
   inputs.innerHTML = formHtml
 }
 
+/* Display Data in Scren */
 const showData = (inputKey, data) => {
   const div = document.querySelector("#information")
   const html = handleDisplay[inputKey](data)
