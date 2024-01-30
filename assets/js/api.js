@@ -25,7 +25,7 @@ export const getData = async (url) => {
   return data
 }
 
-  // const {data, meta} = await response.json()
-  // console.log (meta.actual_page)
+// const {data, meta} = await response.json()
+// console.log (meta.actual_page)
 
 

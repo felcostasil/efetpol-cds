@@ -3,7 +3,6 @@ export const handleDisplay = {
   nome: ({ data, meta }) => displayTableInformation(data, meta),
   matricula: (data) => displaySingleInformation(data),
 }
-
 /** Building a single Exhibition for "matricula" */
 const displaySingleInformation = (data) => {
   return Object.keys(data).map(key => {
@@ -25,7 +24,7 @@ const displaySingleInformation = (data) => {
       "patente": "Patente"
     }
 
-    return `<p><strong>${mapping[key].toUpperCase()}</strong>: <span>${data[key] ?? "NÃO INFORMADO"}</span></p>`
+    return `<p><strong>${mapping[key].toUpperCase()}</strong>: <span>${typeof data[key] == 'string' ? data[key].toUpperCase() : data[key] ?? 'NÃO INFORMADO'}</span></p>`
   }).join("")
 }
 

@@ -10,6 +10,10 @@ export const search = async function search() {
   // throw new Error("Nothing was selected")
   const previousUrl = getPreviousUri(field)
   const nextUrl = getNextUri(field)
+  if (!field.value) {
+    const noValue = field.key == 'nome' ? 'o' : 'a'
+    return alert(`Informe ${noValue} ${field.key}`)
+  }
   const url = getURI(field)
 
   console.log({ previousUrl, nextUrl, url })
@@ -57,7 +61,6 @@ const showModal = (inputKey, data) => {
   const exhibModal = handleDisplay[inputKey](data)
   modal.innerHTML = exhibModal
 }
-
 export const clickRow = async function (event) {
   console.log(event.target.closest("tr"))
   const matricula = event.target.closest("tr").id
