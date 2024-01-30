@@ -36,13 +36,13 @@ export const selectChangeHandler = function (event) {
     inputs.innerHTML = formHtml
     return
   }
-
   formHtml = `
         <label for="matricula">Matrícula:</label>
         <input class="form-control" placeholder="Digite a matrícula" id="matricula" type="number"><br>
     `
 
   inputs.innerHTML = formHtml
+
 }
 
 /* Display Data in Scren */
