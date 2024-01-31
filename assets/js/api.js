@@ -9,12 +9,12 @@ export const getPreviousUri = ({ key, value }) => `${baseURL}?${key}=${value}&pa
 
 
 export const getData = async (url) => {
-  console.log(url)
+  // console.log(url)
   const response = await fetch(url)
 
 
   if (response.status !== 200) {
-    console.error("Something wrong happened!")
+    return console.error("Something wrong happened!")
   }
 
   const data = await response.json()

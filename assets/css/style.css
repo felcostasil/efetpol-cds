@@ -37,11 +37,11 @@
       margin-top: 60px;
     }
 
-    .navbar {
+    /* .navbar {
       align-items: center;
       position: relative;
       justify-content: space-between;
-    }
+    } */
 
     .card {
       box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
@@ -50,7 +50,7 @@
     }
 
     footer {
-      position: relative;
+      position: fixed;
       bottom: 10px;
       width: 100%;
     }

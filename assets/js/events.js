@@ -2,6 +2,13 @@ import { getURI, getData, getNextUri, getPreviousUri } from "./api.js"
 import { handleDisplay } from "./display.js"
 
 /* Identify key in selection */
+const validKey = (value, key) => {
+  if (key == 'nome') {
+    return value.data.length ? false : true
+  }
+  return value ? false : true
+}
+
 export const search = async function search() {
   const field = getInputValue()
   if (!field) {
@@ -14,13 +21,21 @@ export const search = async function search() {
     const noValue = field.key == 'nome' ? 'o' : 'a'
     return alert(`Informe ${noValue} ${field.key}`)
   }
+  if (field.value.length < 3) {
+    return alert('A busca deve conter ao menos 3 caracteres')
+  }
   const url = getURI(field)
 
   console.log({ previousUrl, nextUrl, url })
 
 
   const data = await getData(url)
-  console.log(field.key)
+  let valid = validKey(data, field.key)
+  // console.log(data)
+  if (valid) {
+    return document.querySelector('#information').textContent = 'Dado não encontrado'
+    // return alert(`Dado não encontrado`)
+  }
 
   showData(field.key, data)
   // showModal(field.key, data)

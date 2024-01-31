@@ -30,7 +30,7 @@ const displaySingleInformation = (data) => {
 
 /** Building Table Based on Input Name */
 const displayTableInformation = (data, meta) => {
-  console.log(data, meta)
+  // console.log(data, meta)
   const tableRows = data
     .map(({ nomeServidor, matricula, cpf, rg }) => (`
       <tr onclick="clickRow(event)" id="${matricula}" data-bs-toggle="modal" data-bs-target="#custom-modal">
@@ -41,7 +41,7 @@ const displayTableInformation = (data, meta) => {
         </tr>`)
     )
 
-  console.log(tableRows)
+  // console.log(tableRows)
 
   const tableContent = tableRows.join("")
   // console.log(tableContent)
@@ -63,7 +63,7 @@ const displayTableInformation = (data, meta) => {
         </tbody>
       </table>
 
-      <div class="justify navbar navbar-expand-xxl bg-body-tertiary d-flex p-2">
+      <div class=" bg-body-tertiary d-flex justify-content-between p-2">
       <button class="btn-group btn-group-toggle btn btn-primary" type="button" onclick="backPage()">Back</button>
       <p id="page">Página ${window.currentPage} de ${window.meta.total_pages}</p>
       <button class="btn-group btn-group-toggle btn btn-primary" type="button" onclick="nextPage()">Next</button>
