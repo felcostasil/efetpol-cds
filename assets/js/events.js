@@ -53,6 +53,7 @@ export const selectChangeHandler = function (event) {
         <input  placeholder="Digite o nome" id="nome" type="text" class="form-control" ><br> 
       `
     inputs.innerHTML = formHtml
+    document.querySelector('#information').textContent = ''
     return
   }
   formHtml = `
@@ -61,6 +62,7 @@ export const selectChangeHandler = function (event) {
     `
 
   inputs.innerHTML = formHtml
+  document.querySelector('#information').textContent = ''
 
 }
 
