@@ -9,6 +9,13 @@ const validKey = (value, key) => {
   return value ? false : true
 }
 
+// inputField.addEventListener('keypress', function (event) {
+//   if (event.key === 'Enter') {
+//     event.preventDefault(); // Prevent the default form submission behavior
+//     search(); // Call the search function when Enter is pressed
+//   }
+// });
+
 export const search = async function search() {
   const field = getInputValue()
   if (!field) {
