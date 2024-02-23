@@ -9,12 +9,6 @@ const validKey = (value, key) => {
   return value ? false : true
 }
 
-inputField.addEventListener('keypress', function (event) {
-  if (event.key === 'Enter') {
-    event.preventDefault(); // Prevent the default form submission behavior
-    search(); // Call the search function when Enter is pressed
-  }
-});
 
 export const search = async function search() {
   const field = getInputValue()
@@ -47,6 +41,15 @@ export const search = async function search() {
   showData(field.key, data)
   // showModal(field.key, data)
 }
+const inputField = document.getElementById('inputs')
+
+inputField.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevent the default form submission behavior
+    search(); // Call the search function when Enter is pressed
+  }
+});
+
 
 export const selectChangeHandler = function (event) {
   const { target: { value } } = event
@@ -65,7 +68,7 @@ export const selectChangeHandler = function (event) {
   }
   formHtml = `
         <label for="matricula">Matrícula:</label>
-        <input class="form-control" placeholder="Digite a matrícula" id="matricula" type="number"><br>
+        <input maxlength="8" class="form-control" placeholder="Digite a matrícula" id="matricula" type="number"><br>
     `
 
   inputs.innerHTML = formHtml
@@ -73,7 +76,7 @@ export const selectChangeHandler = function (event) {
 
 }
 
-/* Display Data in Scren */
+/* Display Data in Screen */
 const showData = (inputKey, data) => {
   const div = document.querySelector("#information")
   const html = handleDisplay[inputKey](data)
