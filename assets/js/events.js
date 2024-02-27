@@ -41,6 +41,8 @@ export const search = async function search() {
   showData(field.key, data)
   // showModal(field.key, data)
 }
+
+// Use of "Enter" to access search function
 const inputField = document.getElementById('inputs')
 
 inputField.addEventListener('keypress', function (event) {
@@ -50,6 +52,13 @@ inputField.addEventListener('keypress', function (event) {
   }
 });
 
+// Function to permit just number to type.
+export const formNum = function (e) {
+  console.log(e)
+  if (e.keyCode < 48 || e.keyCode > 57) {
+    return false;
+  }
+}
 
 export const selectChangeHandler = function (event) {
   const { target: { value } } = event
@@ -58,23 +67,35 @@ export const selectChangeHandler = function (event) {
 
   /** Selection of Input mode */
   if (value == "name") {
+
     formHtml = `
-        <label for="nome">Nome: </label>
-        <input  placeholder="Digite o nome" id="nome" type="text" class="form-control" ><br> 
-      `
+    <label for="nome">Nome: </label>
+    <input  placeholder="Digite o nome" id="nome" type="text" class="form-control" ><br> 
+    `
     inputs.innerHTML = formHtml
     document.querySelector('#information').textContent = ''
     return
   }
   formHtml = `
-        <label for="matricula">Matrícula:</label>
-        <input maxlength="8" class="form-control" placeholder="Digite a matrícula" id="matricula" type="number"><br>
-    `
+  <label for="matricula">Matrícula:</label>
+  <input maxlength="8" class="form-control" placeholder="Digite a matrícula" id="matricula" pattern="[0-9]{8,8}" inputmode="numeric" onkeypress="return formNum(event)" type="text"><br>
+  `
 
   inputs.innerHTML = formHtml
-  document.querySelector('#information').textContent = ''
 
 }
+
+
+
+// formNumber.addEventListener('keypress', function (e) {
+//   console.log(e)
+//   if (e.keyCode < 48 || e.keyCode > 57) {
+//     return false;
+//     // return formNumber.reportValidity()
+//   }
+// })
+document.querySelector('#information').textContent = ''
+
 
 /* Display Data in Screen */
 const showData = (inputKey, data) => {
