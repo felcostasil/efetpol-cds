@@ -54,7 +54,7 @@ inputField.addEventListener('keypress', function (event) {
 
 // Function to permit just number to type.
 export const formNum = function (e) {
-  console.log(e)
+  // console.log(e)
   if (e.keyCode < 48 || e.keyCode > 57) {
     return false;
   }
@@ -82,6 +82,7 @@ export const selectChangeHandler = function (event) {
   `
 
   inputs.innerHTML = formHtml
+  document.querySelector('#information').textContent = ''
 
 }
 
@@ -94,7 +95,6 @@ export const selectChangeHandler = function (event) {
 //     // return formNumber.reportValidity()
 //   }
 // })
-document.querySelector('#information').textContent = ''
 
 
 /* Display Data in Screen */
