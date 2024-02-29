@@ -116,7 +116,7 @@ export const clickRow = async function (event) {
   const data = await getData(url)
   // showData("matricula", data)
   showModal('matricula', data)
-  console.log(matricula)
+  // console.log(matricula)
 }
 
 export const nextPage = async function nextPage() {
@@ -128,7 +128,7 @@ export const nextPage = async function nextPage() {
   }
   const url = getURI({ key: "nome", value: window.searchName })
   const data = await getData(url)
-  console.log(data)
+  // console.log(data)
   showData("nome", data)
 }
 
